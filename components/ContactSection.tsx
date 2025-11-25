@@ -38,7 +38,7 @@ export default function ContactSection({ lang }: ContactSectionProps) {
       icon: Linkedin,
       label: "LinkedIn",
       value: "Juan Pablo Solís Ruiz",
-      href: "www.linkedin.com/in/juan-pablo-solís-ruiz-h4xter",
+      href: "https://www.linkedin.com/in/juan-pablo-solís-ruiz-h4xter",
     },
     {
       icon: MapPin,

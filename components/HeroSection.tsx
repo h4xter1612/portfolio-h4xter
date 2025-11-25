@@ -67,12 +67,12 @@ export default function HeroSection({ lang }: HeroSectionProps) {
           Icon={Github}
         />
         <SocialIcon
-          href="www.linkedin.com/in/juan-pablo-solís-ruiz-h4xter"
+          href="https://www.linkedin.com/in/juan-pablo-solís-ruiz-h4xter"
           label="LinkedIn"
           Icon={Linkedin}
         />
         <SocialIcon
-          href="jp.sruiz18.tec@gmail.com"
+          href="mailto:jp.sruiz18.tec@gmail.com"
           label="Email"
           Icon={Mail}
         />
