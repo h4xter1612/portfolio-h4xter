@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Github, Linkedin, MapPin } from "lucide-react";
 import { Lang } from "../data/projects";
@@ -9,7 +9,7 @@ interface ContactSectionProps {
   lang: Lang;
 }
 
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/movzlkwy"
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/movzlkwy";
 
 export default function ContactSection({ lang }: ContactSectionProps) {
   const isEn = lang === "en";
@@ -18,7 +18,7 @@ export default function ContactSection({ lang }: ContactSectionProps) {
     "idle"
   );
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("submitting");
 
@@ -75,7 +75,7 @@ export default function ContactSection({ lang }: ContactSectionProps) {
   return (
     <motion.section
       id="contact"
-      className="scroll-mt-28 min-h-screen flex flex-col justify-center py-20"
+      className="scroll-mt-28 min-h-[80vh] flex flex-col justify-center py-16 md:py-20"
       initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
@@ -134,7 +134,7 @@ export default function ContactSection({ lang }: ContactSectionProps) {
             </ul>
           </motion.div>
 
-          {/* Formulario */}
+          {/* Formulario conectado a Formspree */}
           <motion.form
             onSubmit={handleSubmit}
             className="space-y-4 rounded-3xl border border-slate-800 bg-slate-900/85 p-5"
@@ -146,31 +146,72 @@ export default function ContactSection({ lang }: ContactSectionProps) {
             <h3 className="text-sm font-semibold text-slate-50 md:text-base">
               {isEn ? "Send a Message" : "Envíame un Mensaje"}
             </h3>
+
+            {/* Campo oculto opcional para asunto */}
+            <input
+              type="hidden"
+              name="_subject"
+              value={
+                isEn
+                  ? "New message from portfolio"
+                  : "Nuevo mensaje desde el portafolio"
+              }
+            />
+
             <div className="space-y-3">
               <input
+                name="name"
                 className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none focus:border-sky-500"
                 placeholder={isEn ? "Your Name" : "Tu Nombre"}
                 required
               />
               <input
                 type="email"
+                name="email"
                 className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none focus:border-sky-500"
                 placeholder={isEn ? "Your Email" : "Tu Correo"}
                 required
               />
               <textarea
+                name="message"
                 rows={4}
                 className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none focus:border-sky-500"
                 placeholder={isEn ? "Your Message" : "Tu Mensaje"}
                 required
               />
             </div>
-            <button
-              type="submit"
-              className="rounded-full bg-sky-500 px-7 py-2.5 text-sm font-semibold text-white shadow-lg shadow-sky-500/40 transition hover:-translate-y-0.5 hover:bg-sky-400"
-            >
-              {isEn ? "Send Message" : "Enviar Mensaje"}
-            </button>
+
+            <div className="space-y-2">
+              <button
+                type="submit"
+                disabled={status === "submitting"}
+                className="rounded-full bg-sky-500 px-7 py-2.5 text-sm font-semibold text-white shadow-lg shadow-sky-500/40 transition hover:-translate-y-0.5 hover:bg-sky-400 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {status === "submitting"
+                  ? isEn
+                    ? "Sending..."
+                    : "Enviando..."
+                  : isEn
+                  ? "Send Message"
+                  : "Enviar Mensaje"}
+              </button>
+
+              {status === "success" && (
+                <p className="text-xs text-emerald-400">
+                  {isEn
+                    ? "Message sent successfully. I’ll get back to you soon."
+                    : "Mensaje enviado correctamente. Te responderé pronto."}
+                </p>
+              )}
+
+              {status === "error" && (
+                <p className="text-xs text-red-400">
+                  {isEn
+                    ? "Something went wrong. Please try again or email me directly."
+                    : "Ocurrió un error. Intenta de nuevo o mándame un correo directo."}
+                </p>
+              )}
+            </div>
           </motion.form>
         </div>
       </div>
