@@ -9,16 +9,40 @@ interface ContactSectionProps {
   lang: Lang;
 }
 
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/movzlkwy"
+
 export default function ContactSection({ lang }: ContactSectionProps) {
   const isEn = lang === "en";
 
-  const handleSubmit = (e: FormEvent) => {
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">(
+    "idle"
+  );
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert(
-      isEn
-        ? "Form not connected yet. Later you can wire it to Formspree/EmailJS."
-        : "El formulario aún no está conectado. Después lo puedes integrar con Formspree/EmailJS."
-    );
+    setStatus("submitting");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: formData,
+      });
+
+      if (res.ok) {
+        setStatus("success");
+        form.reset();
+      } else {
+        setStatus("error");
+      }
+    } catch (err) {
+      setStatus("error");
+    }
   };
 
   const contactItems = [
