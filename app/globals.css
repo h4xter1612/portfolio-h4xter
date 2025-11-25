@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* Paleta base (no estorba a nuestros bg de Tailwind) */
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -12,6 +13,7 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* Modo oscuro por defecto */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -19,8 +21,25 @@
   }
 }
 
+/* ---------- Ajustes globales que nos interesan ---------- */
+
+/* Scroll suave entre secciones (#projects, #skills, etc.) */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Efecto "zoom" global en pantallas grandes (~112–115%) */
+@media (min-width: 1024px) {
+  html {
+    font-size: 18px; /* prueba 17px si lo ves demasiado grande */
+  }
+}
+
+/* Fuente base y colores por defecto del body */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
 }
+
