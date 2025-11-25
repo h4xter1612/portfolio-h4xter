@@ -25,8 +25,8 @@ export default function ContactSection({ lang }: ContactSectionProps) {
     {
       icon: Mail,
       label: isEn ? "Email" : "Correo",
-      value: "tu.correo@example.com",
-      href: "mailto:tu.correo@example.com",
+      value: "jp.sruiz18.tec@gmail.com",
+      href: "mailto:jp.sruiz18.tec@gmail.com",
     },
     {
       icon: Github,
@@ -37,8 +37,8 @@ export default function ContactSection({ lang }: ContactSectionProps) {
     {
       icon: Linkedin,
       label: "LinkedIn",
-      value: "/in/tu-perfil",
-      href: "https://www.linkedin.com/in/tu-perfil",
+      value: "Juan Pablo Solís Ruiz",
+      href: "www.linkedin.com/in/juan-pablo-solís-ruiz-h4xter",
     },
     {
       icon: MapPin,
