@@ -126,7 +126,7 @@ export const projects: Project[] = [
             en: "STAR-like Spherical Tokamak Equilibrium (FreeGSNKE)",
             es: "Equilibrio de Tokamak Esférico tipo STAR (FreeGSNKE)",
         },
-        category: "Computational Physics",
+        category: "Plasma Physics",
         shortDescription: {
             en: "End-to-end Grad–Shafranov workflow with FreeGSNKE to design and diagnose a bean-shaped spherical tokamak equilibrium inspired by the STAR reactor concept.",
             es: "Flujo de trabajo completo de Grad–Shafranov con FreeGSNKE para diseñar y diagnosticar un equilibrio de tokamak esférico tipo STAR con sección en forma de frijol.",
