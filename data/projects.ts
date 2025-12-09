@@ -7,7 +7,8 @@ export type ProjectCategory =
 | "Simulation"
 | "Experimental Research"
 | "Engineering Design"
-| "Data Analysis";
+| "Data Analysis"
+| "Plasma Physics";
 
 export interface LocalizedString {
     en: string;
