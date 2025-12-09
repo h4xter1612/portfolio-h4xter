@@ -30,6 +30,10 @@ const categoryLabels: Record<ProjectCategory, { en: string; es: string }> = {
     en: "Data Analysis",
     es: "Análisis de Datos",
   },
+  "Plasma Physics": {
+    en: "Plasma Physics",
+    es: "Física de plasmas",
+  },
 };
 
 export default function ProjectsSection({ lang }: ProjectsSectionProps) {

@@ -119,6 +119,36 @@ export const projects: Project[] = [
         pdfUrl: "/projects/two-fluid-plasma-report.pdf", // opcional; bórralo si aún no tienes PDF
         projectUrl: "https://github.com/h4xter1612/2FluidPlasmaSim",
     },
+    {
+        id: "star-like-tokamak-equilibrium",
+        title: {
+            en: "STAR-like Spherical Tokamak Equilibrium (FreeGSNKE)",
+            es: "Equilibrio de Tokamak Esférico tipo STAR (FreeGSNKE)",
+        },
+        category: "Computational Physics",
+        shortDescription: {
+            en: "End-to-end Grad–Shafranov workflow with FreeGSNKE to design and diagnose a bean-shaped spherical tokamak equilibrium inspired by the STAR reactor concept.",
+            es: "Flujo de trabajo completo de Grad–Shafranov con FreeGSNKE para diseñar y diagnosticar un equilibrio de tokamak esférico tipo STAR con sección en forma de frijol.",
+        },
+        image: "/images/star-bean-equilibrium.png", // por ejemplo: copia STAR_bean_equilibrium.png a esta ruta
+        achievements: [
+            {
+                en: "Built a full STAR-like machine in FreeGSNKE from scratch, including inner/outer walls and a dedicated PF/CS coil set.",
+                es: "Construí desde cero una máquina tipo STAR en FreeGSNKE, incluyendo paredes interna/externa y un conjunto dedicado de bobinas PF/CS.",
+            },
+            {
+                en: "Implemented PF/CS current scans and a misfit-based micro-optimization to obtain a low–aspect-ratio, highly elongated, bean-shaped equilibrium with positive triangularity.",
+                es: "Implementé barridos de corrientes PF/CS y una micro–optimización basada en una métrica de misfit para obtener un equilibrio de baja razón de aspecto, alta elongación y sección tipo bean con triangularidad positiva.",
+            },
+            {
+                en: "Computed detailed MHD diagnostics — separatrix geometry, q(ψ), pressure and β_p, j_φ(R,Z), magnetic shear — and generated a quasi-static ramp-up animation of the STAR-like equilibrium.",
+                es: "Calculé diagnósticos MHD detallados — geometría de la separatriz, q(ψ), presión y β_p, j_φ(R,Z), cizalla magnética — y generé una animación de ramp-up cuasiestático del equilibrio tipo STAR.",
+            },
+        ],
+        technologies: ["Python", "NumPy", "Matplotlib", "FreeGSNKE"],
+        pdfUrl: "https://drive.google.com/file/d/1dsjF9RD1yCmZXFg2fVozWc6MIJ06WTZk/view?usp=sharing", // cámbialo a /projects/... si luego lo hospedas en tu web
+        projectUrl: "https://github.com/h4xter1612/STAR-like-tokamak-equilibrium",
+    },
 
 
 ];
