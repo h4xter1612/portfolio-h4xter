@@ -151,6 +151,47 @@ export const projects: Project[] = [
         projectUrl: "https://github.com/h4xter1612/STAR-like-tokamak-equilibrium",
     },
 
+    {
+        id: "grad-shafranov-derivation",
+        title: {
+            en: "Derivation of the Grad–Shafranov Equation for Tokamak Equilibrium",
+            es: "Derivación de la Ecuación de Grad–Shafranov para el Equilibrio en un Tokamak",
+        },
+        category: "Plasma Physics",
+        shortDescription: {
+            en: "Self-contained derivation of the Grad–Shafranov equation for axisymmetric tokamak equilibria, starting from Maxwell's equations and MHD force balance.",
+            es: "Derivación auto-contenida de la ecuación de Grad–Shafranov para equilibrios axisimétricos de tokamak, partiendo de las ecuaciones de Maxwell y el balance de fuerzas MHD.",
+        },
+        image: "/images/grad-shafranov.png", 
+        // por ejemplo: un screenshot bonito de una página del PDF o un esquema de un tokamak
+
+        achievements: [
+            {
+                en: "Derived the Grad–Shafranov equilibrium equation step by step from ∇·B=0, ∇×B=μ₀J and J×B=∇p in cylindrical coordinates with toroidal symmetry.",
+                es: "Derivé paso a paso la ecuación de equilibrio de Grad–Shafranov a partir de ∇·B=0, ∇×B=μ₀J y J×B=∇p en coordenadas cilíndricas con simetría toroidal.",
+            },
+            {
+                en: "Introduced the poloidal flux function ψ(r,z), the toroidal field function F(ψ) and the elliptic operator Δ*ψ, explaining their geometric and physical meaning for tokamak equilibria.",
+                es: "Introduje la función de flujo poloidal ψ(r,z), la función de campo toroidal F(ψ) y el operador elíptico Δ*ψ, explicando su significado geométrico y físico para equilibrios de tokamak.",
+            },
+            {
+                en: "Produced a 10+ page technical note in LaTeX with detailed annotations, suitable as a reference for future plasma physics and MHD studies.",
+                es: "Redacté una nota técnica de más de 10 páginas en LaTeX con explicaciones detalladas, adecuada como referencia para estudios futuros en física de plasmas y MHD.",
+            },
+        ],
+        technologies: [
+            "LaTeX",
+            "Analytical MHD",
+            "Plasma Physics",
+            "Vector Calculus",
+        ],
+        pdfUrl: "https://drive.google.com/file/d/1BLHgM1FU4N-vCwcEa0CUFIDKKtpjzVj0/view?usp=sharing", 
+        // cámbialo a la ruta real donde subas tu PDF (por ejemplo el que ya tienes hecho)
+        projectUrl: "https://drive.google.com/file/d/1BLHgM1FU4N-vCwcEa0CUFIDKKtpjzVj0/view?usp=sharing", 
+        // si luego subes el .tex a GitHub, pon aquí el repo
+    },
+
+
 
 ];
 
