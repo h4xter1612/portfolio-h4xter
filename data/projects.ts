@@ -34,7 +34,7 @@ export const projects: Project[] = [
             en: "Z-Pinch MHD Stability Simulation",
             es: "Simulación MHD de Estabilidad en Z-Pinch",
         },
-        category: "Simulation", // o "Computational Physics" si te gusta más
+        category: "Plasma Physics", // o "Computational Physics" si te gusta más
         shortDescription: {
             en: "Numerical MHD framework to study Z-pinch stability, exploring sausage and kink modes under different current and pressure profiles.",
             es: "Marco numérico MHD para estudiar la estabilidad de un Z-pinch, explorando modos sausage y kink bajo distintos perfiles de corriente y presión.",
@@ -66,7 +66,7 @@ export const projects: Project[] = [
             en: "PIC Simulation of Two-Stream Instability",
             es: "Simulación PIC de la Inestabilidad de Dos Flujos",
         },
-        category: "Simulation",
+        category: "Plasma Physics",
         shortDescription: {
             en: "1D electrostatic Particle-In-Cell (PIC) simulation of the two-stream instability, resolving the nonlinear evolution of counter-streaming electron beams.",
             es: "Simulación electrostática 1D tipo Particle-In-Cell (PIC) de la inestabilidad de dos flujos, resolviendo la evolución no lineal de haces electrónicos contra–propagantes.",
@@ -96,7 +96,7 @@ export const projects: Project[] = [
             en: "Two-Fluid Plasma Wave Simulation (1D/2D)",
             es: "Simulación de Ondas en Plasma de Dos Fluidos (1D/2D)",
         },
-        category: "Computational Physics",
+        category: "Simulation",
         shortDescription: {
             en: "Two-fluid plasma framework to study wave propagation and basic instabilities, including R/L, O/X and electrostatic modes in 1D and 2D geometries.",
             es: "Marco numérico de dos fluidos para estudiar propagación de ondas e inestabilidades básicas, incluyendo modos R/L, O/X y electrostáticos en geometrías 1D y 2D.",
