@@ -131,7 +131,7 @@ export const projects: Project[] = [
             en: "End-to-end Grad–Shafranov workflow with FreeGSNKE to design and diagnose a bean-shaped spherical tokamak equilibrium inspired by the STAR reactor concept.",
             es: "Flujo de trabajo completo de Grad–Shafranov con FreeGSNKE para diseñar y diagnosticar un equilibrio de tokamak esférico tipo STAR con sección en forma de frijol.",
         },
-        image: "/images/star-bean-equilibrium.png", // por ejemplo: copia STAR_bean_equilibrium.png a esta ruta
+        image: "/images/star_tokamak.gif", // por ejemplo: copia STAR_bean_equilibrium.png a esta ruta
         achievements: [
             {
                 en: "Built a full STAR-like machine in FreeGSNKE from scratch, including inner/outer walls and a dedicated PF/CS coil set.",
