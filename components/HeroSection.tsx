@@ -51,7 +51,7 @@ export default function HeroSection({ lang }: HeroSectionProps) {
           {isEn ? "View Projects" : "Ver Proyectos"}
         </a>
         <a
-          href="/cv/JuanPabloSolis_CV.pdf"
+          href="https://drive.google.com/file/d/1tvY640r6xg9_UI1o_6_mn7lYEMiQGJAF/view?usp=sharing"
           className="rounded-full border border-slate-600 bg-slate-950/70 px-7 py-2.5 text-sm font-semibold text-slate-100 shadow-sm transition hover:border-sky-400 hover:bg-slate-900"
           download
         >
