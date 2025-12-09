@@ -96,7 +96,7 @@ export const projects: Project[] = [
             en: "Two-Fluid Plasma Wave Simulation (1D/2D)",
             es: "Simulación de Ondas en Plasma de Dos Fluidos (1D/2D)",
         },
-        category: "Simulation",
+        category: "Plasma Physics",
         shortDescription: {
             en: "Two-fluid plasma framework to study wave propagation and basic instabilities, including R/L, O/X and electrostatic modes in 1D and 2D geometries.",
             es: "Marco numérico de dos fluidos para estudiar propagación de ondas e inestabilidades básicas, incluyendo modos R/L, O/X y electrostáticos en geometrías 1D y 2D.",
