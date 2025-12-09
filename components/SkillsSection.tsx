@@ -19,39 +19,105 @@ export default function SkillsSection({ lang }: SkillsSectionProps) {
   const cards = [
     {
       icon: Code2,
-      title: isEn ? "Programming" : "Programación",
-      items: ["Python", "MATLAB", "C++", "Julia"],
+      title: isEn
+        ? "Programming & Scientific Computing"
+        : "Programación y Cómputo Científico",
+      items: [
+        "Python, MATLAB, Julia, C++",
+        "NumPy, SciPy, Pandas, Matplotlib",
+        isEn
+          ? "Optimisation and scientific simulation workflows"
+          : "Optimización y flujos de trabajo para simulación científica",
+      ],
       gradient: "from-sky-400 to-cyan-300",
     },
     {
       icon: Cpu,
-      title: isEn ? "Simulation & Modeling" : "Simulación y Modelado",
-      items: ["MHD", "PIC", "Finite Difference", "Finite Volume"],
+      title: isEn ? "Simulation & Modelling" : "Simulación y Modelado",
+      items: [
+        isEn
+          ? "Custom PIC, MHD and two-fluid plasma codes"
+          : "Códigos propios PIC, MHD y de plasma de dos fluidos",
+        isEn
+          ? "Numerical methods for ODEs and PDEs"
+          : "Métodos numéricos para EDOs y EDPs",
+        isEn
+          ? "Geant4 for radiation transport and imaging"
+          : "Geant4 para transporte de radiación e imagenología",
+        isEn
+          ? "Fourier and spectral techniques"
+          : "Técnicas de Fourier y métodos espectrales",
+      ],
       gradient: "from-purple-400 to-sky-300",
     },
     {
-      icon: FlaskConical,
-      title: isEn ? "Experimental Physics" : "Física Experimental",
-      items: ["Plasmas", "Optics", "Instrumentation"],
-      gradient: "from-pink-400 to-orange-300",
+      icon: Sparkles,
+      title: isEn ? "Fusion & Plasma Physics" : "Fusión y Física de Plasmas",
+      items: [
+        isEn
+          ? "Tokamak and Z-pinch equilibria and stability"
+          : "Equilibrios y estabilidad en tokamaks y Z-pinch",
+        isEn
+          ? "Plasma waves, instabilities and dispersion relations"
+          : "Ondas, inestabilidades y relaciones de dispersión en plasmas",
+        isEn
+          ? "Grad–Shafranov and equilibrium tools (FreeGSNKE)"
+          : "Herramientas de equilibrio tipo Grad–Shafranov (FreeGSNKE)",
+      ],
+      gradient: "from-indigo-400 to-purple-300",
     },
     {
       icon: Ruler,
-      title: isEn ? "Engineering Design" : "Diseño de Ingeniería",
-      items: ["CAD", "Prototyping", "RF/Antennas"],
+      title: isEn
+        ? "RF, Antennas & Experimental Skills"
+        : "RF, Antenas y Habilidades Experimentales",
+      items: [
+        isEn
+          ? "Basic RF link design (S-band CubeSat prototype)"
+          : "Diseño básico de enlaces RF (prototipo CubeSat en banda S)",
+        isEn
+          ? "Patch and fractal antennas on FR4 (KiCad)"
+          : "Antenas patch y fractales en FR4 (KiCad)",
+        isEn
+          ? "Optical lab techniques (interferometry, diffraction, spectroscopy)"
+          : "Técnicas de laboratorio óptico (interferometría, difracción, espectroscopía)",
+        isEn
+          ? "Basic electronics and instrumentation"
+          : "Electrónica básica e instrumentación",
+      ],
       gradient: "from-amber-400 to-lime-300",
     },
     {
       icon: BarChart3,
-      title: isEn ? "Data Analysis" : "Análisis de Datos",
-      items: ["Statistics", "Visualization", "Machine Learning (basic)"],
+      title: isEn ? "Data Science & Analysis" : "Ciencia de Datos y Análisis",
+      items: [
+        isEn
+          ? "Statistical modelling and exploratory data analysis"
+          : "Modelado estadístico y análisis exploratorio de datos",
+        isEn
+          ? "Basic machine learning (regression, classification)"
+          : "Aprendizaje automático básico (regresión, clasificación)",
+        isEn
+          ? "Scientific data visualisation"
+          : "Visualización de datos científicos",
+      ],
       gradient: "from-emerald-400 to-teal-300",
     },
     {
-      icon: Sparkles,
-      title: isEn ? "Specialized" : "Especializado",
-      items: ["Fusion & Plasmas", "Numerical Methods", "Scientific Computing"],
-      gradient: "from-indigo-400 to-purple-300",
+      icon: FlaskConical,
+      title: isEn ? "Research & Collaboration" : "Investigación y Colaboración",
+      items: [
+        isEn
+          ? "Independent research projects in fusion and plasma physics"
+          : "Proyectos independientes en fusión y física de plasmas",
+        isEn
+          ? "Experience with interdisciplinary teams (GeoStats, CubeSat comms)"
+          : "Experiencia con equipos interdisciplinarios (GeoStats, comunicaciones CubeSat)",
+        isEn
+          ? "Mentoring and tutoring in physics"
+          : "Mentoría y tutoría en física",
+      ],
+      gradient: "from-pink-400 to-orange-300",
     },
   ];
 
@@ -71,8 +137,8 @@ export default function SkillsSection({ lang }: SkillsSectionProps) {
           </h2>
           <p className="text-sm text-slate-300 md:text-base">
             {isEn
-              ? "Multidisciplinary toolkit spanning computation, experimentation, and theory."
-              : "Conjunto multidisciplinario que abarca cómputo, experimentación y teoría."}
+              ? "Toolset tailored to fusion and plasma physics: from custom simulation codes to RF, antennas and data analysis."
+              : "Conjunto de herramientas orientado a fusión y plasmas: desde códigos de simulación propios hasta RF, antenas y análisis de datos."}
           </p>
         </div>
 
