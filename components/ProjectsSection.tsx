@@ -14,7 +14,7 @@ const categoryLabels: Record<ProjectCategory, { en: string; es: string }> = {
     en: "Computational Physics",
     es: "Física Computacional",
   },
-  Simulation: {
+  "Simulation": {
     en: "Simulation",
     es: "Simulación",
   },
