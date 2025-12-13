@@ -15,9 +15,12 @@ export interface LocalizedString {
   es: string;
 }
 
+export type LocalizedHref = Partial<Record<Lang, string>>;
+export type PdfLink = string | LocalizedHref;
+
 export interface ProjectLinks {
   github?: string;
-  pdf?: string;     // local (/projects/...) o externo (Drive, etc.)
+  pdf?: PdfLink;     // local (/projects/...) o externo (Drive, etc.)
   website?: string; // demo/page opcional
 }
 
@@ -87,7 +90,6 @@ export const projects: Project[] = [
     technologies: ["Python", "NumPy", "SciPy", "Matplotlib"],
     links: {
       github: "https://github.com/h4xter1612/ZPinchSim",
-      // pdf: "/projects/zpinch-sim-report.pdf",
     },
   },
 
@@ -108,7 +110,6 @@ export const projects: Project[] = [
     },
 
     image: "/images/two-stream.png",
-    // image: "/images/two-stream-cover.png",
     detailImage: "/images/two-stream.gif",
 
     achievements: [
@@ -128,7 +129,6 @@ export const projects: Project[] = [
     technologies: ["Python", "NumPy", "SciPy", "Matplotlib"],
     links: {
       github: "https://github.com/h4xter1612/PIC-2StreamInst",
-      // pdf: "/projects/pic-two-stream-report.pdf",
     },
   },
 
@@ -149,7 +149,6 @@ export const projects: Project[] = [
     },
 
     image: "/images/two-fluid-plasma.png",
-    // image: "/images/two-fluid-plasma-cover.png",
     detailImage: "/images/two-fluid-plasma.gif",
 
     achievements: [
@@ -169,7 +168,6 @@ export const projects: Project[] = [
     technologies: ["Python", "NumPy", "SciPy", "Matplotlib"],
     links: {
       github: "https://github.com/h4xter1612/2FluidPlasmaSim",
-      // pdf: "/projects/two-fluid-plasma-report.pdf",
     },
   },
 
@@ -190,7 +188,6 @@ export const projects: Project[] = [
     },
 
     image: "/images/star_tokamak.png",
-    // image: "/images/star_tokamak-cover.png",
     detailImage: "/images/star_tokamak.gif",
 
     achievements: [
@@ -210,7 +207,9 @@ export const projects: Project[] = [
     technologies: ["Python", "NumPy", "Matplotlib", "FreeGSNKE"],
     links: {
       github: "https://github.com/h4xter1612/STAR-like-tokamak-equilibrium",
-      pdf: "https://drive.google.com/file/d/1dsjF9RD1yCmZXFg2fVozWc6MIJ06WTZk/view?usp=sharing",
+      pdf: {
+        en: "docs/STAR.pdf",
+      },
     },
   },
 
@@ -249,8 +248,73 @@ export const projects: Project[] = [
     ],
     technologies: ["LaTeX", "Analytical MHD", "Plasma Physics", "Vector Calculus"],
     links: {
-      pdf: "https://drive.google.com/file/d/1BLHgM1FU4N-vCwcEa0CUFIDKKtpjzVj0/view?usp=sharing",
+      pdf: {
+        en: "/docs/Grad-Shafranov.pdf",
+        es: "/docs/Grad-Shafranov-es.pdf"
+      },
     },
   },
+    {
+      id: "cubesat-fractal-patch-antenna",
+      title: {
+        en: "Dual-Band Fractal Patch Antenna for a 2U CubeSat (S-Band)",
+        es: "Antena de Parche Fractal Doble Banda para CubeSat 2U (Banda S)",
+      },
+      category: "Engineering Design",
+      shortDescription: {
+        en: "Designed, simulated, and prototyped a compact dual-band S-band fractal patch antenna integrated with a CubeSat imaging payload; validated link performance and assessed vacuum compatibility.",
+        es: "Diseñé, simulé y prototipé una antena de parche fractal doble banda en banda S, integrada con la carga útil de imágenes del CubeSat; validé desempeño del enlace y compatibilidad en vacío.",
+      },
+      overview: {
+        en: "Developed an S-band fractal patch antenna concept for CubeSat constraints (compact, planar, no deployment). Verified impedance matching via HFSS simulations and built an FR4 prototype manufactured from a KiCad layout. Integrated the RF chain (coax/SMA + nRF24L01-class transceiver + Raspberry Pi) and demonstrated image transfer and command reception. Environmental work included vacuum testing to surface material outgassing risks and motivate a Rogers RT/duroid redesign for improved gain.",
+        es: "Desarrollé una antena fractal en banda S para restricciones CubeSat (compacta, plana, sin despliegue). Verifiqué el acoplamiento de impedancia con simulaciones en HFSS y fabriqué un prototipo en FR4 a partir de un diseño en KiCad. Integré la cadena RF (coax/SMA + transceptor tipo nRF24L01 + Raspberry Pi) y demostré transferencia de imágenes y recepción de comandos. Como parte ambiental, realicé pruebas en vacío para evidenciar riesgos de desgasificación y motivar un rediseño en Rogers RT/duroid con mejor ganancia.",
+      },
+
+      // Card image: idealmente una foto limpia del prototipo o integración (estática)
+      image: "/images/cubesat-antenna.png",
+
+      // Modal image opcional: aquí puedes poner una composición con S11 + patrón de radiación,
+      // o una foto más “técnica”. Si algún día haces animación, este puede ser el GIF.
+      // detailImage: "/images/cubesat-antenna-detail.png",
+
+      achievements: [
+        {
+          en: "Designed a dual-band fractal patch antenna in S-band, targeting CubeSat constraints (planar form factor, no deployment).",
+          es: "Diseñé una antena de parche fractal doble banda en banda S, cumpliendo restricciones CubeSat (forma plana, sin despliegue).",
+        },
+        {
+          en: "Validated impedance matching in HFSS with dual resonances (~2.45 GHz and ~2.06 GHz) and bandwidths on the order of ~70 MHz / ~45 MHz (S11 < −10 dB).",
+          es: "Validé el acoplamiento de impedancia en HFSS con resonancias dobles (~2.45 GHz y ~2.06 GHz) y anchos de banda del orden de ~70 MHz / ~45 MHz (S11 < −10 dB).",
+        },
+        {
+          en: "Produced an FR4 prototype from a KiCad PCB layout and integrated it with a coax/SMA feed and an nRF24L01-class RF module for end-to-end testing.",
+          es: "Fabricqué un prototipo en FR4 desde un layout en KiCad e integré alimentación coax/SMA y un módulo RF tipo nRF24L01 para pruebas end-to-end.",
+        },
+        {
+          en: "Demonstrated stable data transfer (250 kbps) up to ~85 m, including image transmission and successful command reception.",
+          es: "Demostré transmisión estable (250 kbps) hasta ~85 m, incluyendo envío de imágenes y recepción exitosa de comandos.",
+        },
+        {
+          en: "Ran vacuum tests to assess mechanical integrity and identify FR4 outgassing risks; proposed a Rogers RT/duroid redesign achieving simulated gain improvements (~2.86 dB in Tx band).",
+          es: "Realicé pruebas en vacío para evaluar integridad mecánica e identificar riesgos de desgasificación del FR4; propuse un rediseño en Rogers RT/duroid con mejora simulada de ganancia (~2.86 dB en banda Tx).",
+        },
+      ],
+      technologies: [
+        "KiCad",
+        "ANSYS HFSS",
+        "RF / Antenna Design",
+        "PCB (FR4 / Rogers RT/duroid)",
+        "Raspberry Pi",
+        "nRF24L01 (E01-ML01DP5)",
+        "Coax/SMA (RG316)",
+      ],
+      links: {
+      pdf: {
+        en: "/docs/CubesatAntenna-en.pdf",
+        es: "/docs/CubesatAntenna.pdf"
+      },
+      },
+    },
+
 ];
 

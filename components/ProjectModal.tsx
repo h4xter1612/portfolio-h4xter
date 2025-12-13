@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import type { Project, Lang, ProjectCategory } from "../data/projects";
+import type { Project, Lang, ProjectCategory, PdfLink, LocalizedHref } from "../data/projects";
 import { ExternalLink, FileText, Github, X } from "lucide-react";
 
 interface ProjectModalProps {
@@ -25,6 +25,21 @@ const ui = {
 
 function isExternalUrl(url: string): boolean {
   return /^https?:\/\//i.test(url);
+}
+
+function resolveLocalizedHref(link: PdfLink | undefined, lang: Lang): string | undefined {
+  if (!link) return undefined;
+  if (typeof link === "string") return link;
+
+  const localized = link as LocalizedHref;
+
+  // Preferir idioma actual; fallback a EN; luego ES; luego cualquiera disponible
+  return (
+    localized[lang] ??
+    localized.en ??
+    localized.es ??
+    Object.values(localized).find((v): v is string => typeof v === "string" && v.length > 0)
+  );
 }
 
 export default function ProjectModal({
@@ -78,7 +93,11 @@ export default function ProjectModal({
   } as const;
 
   const panelVariants = {
-    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 16, scale: shouldReduceMotion ? 1 : 0.98 },
+    hidden: {
+      opacity: 0,
+      y: shouldReduceMotion ? 0 : 16,
+      scale: shouldReduceMotion ? 1 : 0.98,
+    },
     show: {
       opacity: 1,
       y: 0,
@@ -94,6 +113,8 @@ export default function ProjectModal({
   } as const;
 
   const mediaSrc = project?.detailImage ?? project?.image;
+
+  const pdfHref = resolveLocalizedHref(project?.links?.pdf, lang);
 
   return (
     <AnimatePresence>
@@ -119,7 +140,6 @@ export default function ProjectModal({
             exit="exit"
             onMouseDown={(e) => e.stopPropagation()}
           >
-            {/* Close (more obvious / better hit area) */}
             <button
               ref={closeBtnRef}
               type="button"
@@ -132,7 +152,6 @@ export default function ProjectModal({
               <X className="h-5 w-5" />
             </button>
 
-            {/* Media (GIF/video only lives here if you use detailImage) */}
             <div className="relative aspect-[16/9] w-full bg-slate-900">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={mediaSrc} alt={t(project.title)} className="h-full w-full object-cover" />
@@ -180,7 +199,7 @@ export default function ProjectModal({
                 </div>
               </div>
 
-              {(project.links?.github || project.links?.pdf || project.links?.website) && (
+              {(project.links?.github || pdfHref || project.links?.website) && (
                 <div className="space-y-3">
                   <h3 className="text-sm font-semibold text-slate-200">{t(ui.links)}</h3>
 
@@ -198,7 +217,7 @@ export default function ProjectModal({
                       </a>
                     )}
 
-                    {project.links?.pdf && <PdfButton lang={lang} href={project.links.pdf} />}
+                    {pdfHref && <PdfButton lang={lang} href={pdfHref} />}
 
                     {project.links?.website && (
                       <a
