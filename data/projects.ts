@@ -208,7 +208,7 @@ export const projects: Project[] = [
     links: {
       github: "https://github.com/h4xter1612/STAR-like-tokamak-equilibrium",
       pdf: {
-        en: "docs/STAR.pdf",
+        en: "/docs/STAR.pdf",
       },
     },
   },
