@@ -271,7 +271,8 @@ export const projects: Project[] = [
       },
 
       // Card image: idealmente una foto limpia del prototipo o integración (estática)
-      image: "/images/cubesat-antenna.png",
+      image: "/images/antenna.png",
+      detailImage: "/images/antennaS11.png",
 
       // Modal image opcional: aquí puedes poner una composición con S11 + patrón de radiación,
       // o una foto más “técnica”. Si algún día haces animación, este puede ser el GIF.
