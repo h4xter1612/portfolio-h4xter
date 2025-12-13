@@ -17,8 +17,8 @@ export interface LocalizedString {
 
 export interface ProjectLinks {
   github?: string;
-  pdf?: string; // can be local (/projects/...) or external (Drive, arXiv, etc.)
-  website?: string; // optional demo/page
+  pdf?: string;     // local (/projects/...) o externo (Drive, etc.)
+  website?: string; // demo/page opcional
 }
 
 export interface Project {
@@ -26,35 +26,23 @@ export interface Project {
   title: LocalizedString;
   category: ProjectCategory;
 
-  /**
-   * Card-level summary (short, 1–2 lines)
-   */
   shortDescription: LocalizedString;
-
-  /**
-   * Modal-level summary (optional). If omitted, the modal will reuse shortDescription.
-   * Keep it 2–4 lines max, admission-committee friendly.
-   */
   overview?: LocalizedString;
 
   /**
-   * Card / modal visual.
+   * Card image (recommended: static PNG/JPG)
    */
   image: string;
 
   /**
-   * 3–5 bullet achievements, action-oriented.
+   * Modal image (optional). Use this for GIFs/animated previews.
+   * If omitted, modal will use `image`.
    */
-  achievements: LocalizedString[];
+  detailImage?: string;
 
-  /**
-   * Tools / languages / frameworks.
-   */
+  achievements: LocalizedString[];
   technologies: string[];
 
-  /**
-   * Links are independent: some projects have only PDF, others only GitHub, some both.
-   */
   links?: ProjectLinks;
 }
 
@@ -74,7 +62,14 @@ export const projects: Project[] = [
       en: "Developed a modular resistive-MHD code to explore how current and pressure profiles drive Z-pinch instabilities, with diagnostics focused on mode growth, nonlinear evolution, and interpretability for plasma-physics studies.",
       es: "Desarrollé un código MHD resistivo y modular para explorar cómo perfiles de corriente y presión disparan inestabilidades en Z-pinch, con diagnósticos centrados en crecimiento modal, evolución no lineal e interpretabilidad.",
     },
-    image: "/images/zpinch-sim.gif",
+
+    // RECOMENDADO: pon aquí una imagen estática (png/jpg)
+    image: "/images/zpinch-sim.png",
+
+    // Si ya tienes el GIF y quieres que SOLO se vea en el modal:
+    // image: "/images/zpinch-sim-cover.png",
+    detailImage: "/images/zpinch-sim.gif",
+
     achievements: [
       {
         en: "Implemented a resistive-MHD solver to model time evolution of an axial Z-pinch configuration.",
@@ -111,7 +106,11 @@ export const projects: Project[] = [
       en: "Built a full 1D electrostatic PIC pipeline to study instability growth, phase-space dynamics, and nonlinear saturation, with comparisons against theoretical expectations for validation.",
       es: "Construí un pipeline PIC electrostático 1D completo para estudiar crecimiento de la inestabilidad, dinámica en espacio de fase y saturación no lineal, comparando contra expectativas teóricas para validar.",
     },
-    image: "/images/two-stream.gif",
+
+    image: "/images/two-stream.png",
+    // image: "/images/two-stream-cover.png",
+    detailImage: "/images/two-stream.gif",
+
     achievements: [
       {
         en: "Implemented the full PIC loop: charge deposition, field solve, and particle push under periodic boundary conditions.",
@@ -148,7 +147,11 @@ export const projects: Project[] = [
       en: "Implemented separate ion/electron dynamics coupled to field equations to validate dispersion behavior for multiple wave branches, enabling controlled parameter scans for plasma-physics interpretation.",
       es: "Implementé dinámica separada ion/electrón acoplada a ecuaciones de campo para validar dispersión en varias ramas de ondas, habilitando barridos de parámetros controlados para interpretación en plasmas.",
     },
-    image: "/images/two-fluid-plasma.gif",
+
+    image: "/images/two-fluid-plasma.png",
+    // image: "/images/two-fluid-plasma-cover.png",
+    detailImage: "/images/two-fluid-plasma.gif",
+
     achievements: [
       {
         en: "Implemented a two-fluid model with ion/electron dynamics coupled to Maxwell-like field equations.",
@@ -185,7 +188,11 @@ export const projects: Project[] = [
       en: "Built a STAR-like machine model and ran PF/CS current scans with a misfit metric to converge to low-aspect-ratio, high-elongation equilibria, then computed MHD-relevant diagnostics for interpretability and reporting.",
       es: "Construí un modelo de máquina tipo STAR y ejecuté barridos de corrientes PF/CS con una métrica de misfit para converger a equilibrios de baja razón de aspecto y alta elongación, calculando diagnósticos MHD para interpretabilidad y reporte.",
     },
-    image: "/images/star_tokamak.gif",
+
+    image: "/images/star_tokamak.png",
+    // image: "/images/star_tokamak-cover.png",
+    detailImage: "/images/star_tokamak.gif",
+
     achievements: [
       {
         en: "Modeled a STAR-like machine in FreeGSNKE, including vessel geometry and a dedicated PF/CS coil set.",
@@ -222,7 +229,10 @@ export const projects: Project[] = [
       en: "Produced a clear, step-by-step derivation with geometric intuition (ψ, F(ψ), Δ* operator) and notation aligned with standard tokamak-equilibrium literature, suitable as a reference for future research work.",
       es: "Redacté una derivación paso a paso con intuición geométrica (ψ, F(ψ), operador Δ*) y notación alineada con literatura estándar de equilibrios, útil como referencia para trabajo futuro.",
     },
+
     image: "/images/grad-shafranov.png",
+    // detailImage opcional (si un día quieres animación o más capturas, puedes expandir)
+
     achievements: [
       {
         en: "Derived Grad–Shafranov from ∇·B=0, ∇×B=μ₀J, and J×B=∇p in cylindrical coordinates under toroidal symmetry.",
