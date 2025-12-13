@@ -316,6 +316,69 @@ export const projects: Project[] = [
       },
       },
     },
+    {
+      id: "geant4-radiography-framework",
+      title: {
+        en: "Geant4 Framework for X-Ray Radiography & CT Simulation",
+        es: "Framework en Geant4 para Simulación de Radiografía y CT con Rayos X",
+      },
+      category: "Simulation",
+
+      shortDescription: {
+        en: "Monte Carlo imaging pipeline (Geant4 + Python) for customizable X-ray radiography, dual-energy decomposition (DEXA/ACNR), and CT reconstruction with DICOM export.",
+        es: "Pipeline de imagenología por Monte Carlo (Geant4 + Python) para radiografía de rayos X configurable, descomposición de doble energía (DEXA/ACNR) y reconstrucción CT con exportación a DICOM.",
+      },
+
+      overview: {
+        en: "Developed (team project) a configurable Geant4 simulation framework to model X-ray source–target–detector geometries, characterize spectra, compute attenuation coefficients, and generate radiography/tomography datasets. Post-processing in Python supports CT reconstruction (inverse Radon) and DICOM export for visualization workflows.",
+        es: "Desarrollé (proyecto en equipo) un framework configurable en Geant4 para modelar la geometría fuente–objeto–detector, caracterizar espectros, calcular coeficientes de atenuación y generar datasets de radiografía/tomografía. El post-procesado en Python permite reconstrucción CT (Radon inverso) y exportación a DICOM para flujos de visualización.",
+      },
+
+      // Card image (estática 16:9)
+      image: "/images/geant4.png",
+
+      // Modal image (opcional: GIF/preview)
+      detailImage: "/images/geant4D.gif",
+
+      achievements: [
+        {
+          en: "Implemented a Geant4 + Python workflow for high-resolution radiography and tomography generation, suitable for large-scale synthetic datasets.",
+          es: "Implementé un flujo Geant4 + Python para generar radiografías y tomografías de alta resolución, útil para datasets sintéticos a gran escala.",
+        },
+        {
+          en: "Computed mass attenuation coefficients via thickness-scan algorithm and validated against recorded data (global errors ~0.58%, 0.37%, 2.80% for representative tissues).",
+          es: "Calculé coeficientes de atenuación másica mediante un algoritmo de barrido de espesor y validé contra datos registrados (errores globales ~0.58%, 0.37%, 2.80% para tejidos representativos).",
+        },
+        {
+          en: "Simulated dual-energy radiography and applied DEXA-style decomposition methods (SLS/ACNR) to separate bone and soft-tissue components.",
+          es: "Simulé radiografía de doble energía y apliqué métodos tipo DEXA (SLS/ACNR) para separar componentes de hueso y tejido blando.",
+        },
+        {
+          en: "Built a CT pipeline with logarithmic projection correction, inverse Radon reconstruction (scikit-image), and DICOM export (pydicom) for 3D visualization.",
+          es: "Construí un pipeline de CT con corrección logarítmica de proyecciones, reconstrucción por Radon inverso (scikit-image) y exportación DICOM (pydicom) para visualización 3D.",
+        },
+      ],
+
+      technologies: [
+        "Geant4",
+        "C++",
+        "Python",
+        "NumPy",
+        "SciPy",
+        "scikit-image",
+        "pydicom",
+        "DICOM",
+        "Monte Carlo",
+        "Medical Imaging",
+      ],
+
+      links: {
+        github: "https://github.com/miguelcomett/IFI.03.G4-Radiography.git",
+        pdf: {
+          en: "/docs/Geant4.pdf",
+        },
+      },
+    }
 
 ];
 
