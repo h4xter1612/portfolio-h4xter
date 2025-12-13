@@ -338,7 +338,7 @@ export const projects: Project[] = [
       image: "/images/geant4.png",
 
       // Modal image (opcional: GIF/preview)
-      detailImage: "/images/geant4D.gif",
+      detailImage: "/images/geant4D.png",
 
       achievements: [
         {
