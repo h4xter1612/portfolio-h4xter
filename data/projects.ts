@@ -378,7 +378,270 @@ export const projects: Project[] = [
           en: "/docs/Geant4.pdf",
         },
       },
-    }
+    },
+    {
+      id: "ftp-fringe-profilometry",
+      title: {
+        en: "Fourier Transform Profilometry (Fringe Projection)",
+        es: "Perfilometría por Proyección de Franjas (FTP)",
+      },
+      category: "Experimental Research",
+      shortDescription: {
+        en: "3D surface reconstruction via fringe projection and Fourier Transform Profilometry, converting phase maps into height profiles.",
+        es: "Reconstrucción 3D de superficies mediante proyección de franjas y Perfilometría por Transformada de Fourier, convirtiendo mapas de fase en perfiles de altura.",
+      },
+      overview: {
+        en: "Implemented an FTP workflow to recover surface geometry from projected fringes: acquisition, spectral filtering, phase unwrapping, and height reconstruction with practical calibration considerations for robust measurements.",
+        es: "Implementé un flujo FTP para recuperar la geometría de una superficie a partir de franjas proyectadas: adquisición, filtrado espectral, desenvolvimiento de fase y reconstrucción de altura con consideraciones prácticas de calibración para mediciones robustas.",
+      },
+
+      // Card image (static, 16:9). Ej: foto del setup o resultado 3D/altura.
+      image: "/images/perfil.png",
+
+      // Modal image opcional (si quieres mostrar otra evidencia: mapa de fase/altura).
+      detailImage: "/images/perfilr.png",
+
+      achievements: [
+        {
+          en: "Built an end-to-end FTP pipeline: fringe acquisition, FFT-based carrier isolation, phase recovery and unwrapping.",
+          es: "Construí un pipeline FTP end-to-end: adquisición de franjas, aislamiento del portador con FFT, recuperación y desenvolvimiento de fase.",
+        },
+        {
+          en: "Reconstructed height/shape maps suitable for quantitative inspection and reporting.",
+          es: "Reconstruí mapas de altura/forma útiles para inspección cuantitativa y reporte.",
+        },
+        {
+          en: "Documented measurement assumptions and practical calibration steps to improve repeatability.",
+          es: "Documenté supuestos de medición y pasos prácticos de calibración para mejorar repetibilidad.",
+        },
+      ],
+      technologies: [
+        "Optics / Metrology",
+        "Fringe Projection",
+        "Fourier Transform (FFT)",
+        "Phase Unwrapping",
+        "Image Processing",
+        "MATLAB" // | "Python" (elige lo que aplique)
+      ],
+      links: {
+        pdf: {
+          en: "/docs/profilometry-en.pdf", // TODO: pon tu PDF/Slides en EN si lo tienes
+          es: "/docs/profilometry-es.pdf", // TODO: pon tu PDF/Slides en ES
+        },
+        // github: "https://github.com/....", // opcional
+      },
+    },
+    {
+      id: "optical-pulses-nlse",
+      title: {
+        en: "Optical Pulse Propagation in Fiber (NLSE) — System Optimization",
+        es: "Propagación de Pulsos Ópticos en Fibra (NLSE) — Optimización",
+      },
+      category: "Simulation",
+      shortDescription: {
+        en: "Simulated pulse propagation under dispersion and nonlinearity using the Nonlinear Schrödinger Equation, optimizing performance trade-offs for fiber communications.",
+        es: "Simulé la propagación de pulsos bajo dispersión y no linealidad con la Ecuación No Lineal de Schrödinger, optimizando compromisos de desempeño para comunicaciones en fibra.",
+      },
+      overview: {
+        en: "Developed simulations to study temporal evolution of pulses along distance and evaluate parameter choices that improve transmission stability and efficiency, producing diagnostic visualizations for interpretation.",
+        es: "Desarrollé simulaciones para estudiar la evolución temporal de pulsos a lo largo de la distancia y evaluar parámetros que mejoran estabilidad y eficiencia de transmisión, generando visualizaciones diagnósticas para interpretación.",
+      },
+
+      // Card image (static 16:9). Ej: heatmap t vs z (tu imagen de resultado).
+      image: "/images/pulse.png",
+
+      // Modal (si quieres una versión más detallada o un segundo resultado)
+      detailImage: "/images/pulsep.png",
+
+      achievements: [
+        {
+          en: "Modeled pulse propagation including key dispersion/nonlinear effects under an NLSE-based framework.",
+          es: "Modelé la propagación de pulsos incorporando efectos clave de dispersión/no linealidad bajo un marco basado en NLSE.",
+        },
+        {
+          en: "Generated time–distance diagnostics to visualize pulse evolution and stability regimes.",
+          es: "Generé diagnósticos tiempo–distancia para visualizar evolución del pulso y regímenes de estabilidad.",
+        },
+        {
+          en: "Performed comparative sweeps/optimization to identify parameter ranges that improve performance trade-offs.",
+          es: "Realicé barridos comparativos/optimización para identificar rangos de parámetros que mejoran compromisos de desempeño.",
+        },
+      ],
+      technologies: [
+        "Nonlinear Schrödinger Equation (NLSE)",
+        "Numerical Simulation",
+        "FFT / Spectral Methods",
+        "Optimization / Parameter Sweeps",
+        "Fiber Optics",
+        // "Python" | "MATLAB"
+      ],
+      links: {
+        // Si solo tienes presentación, es totalmente válido: súbela como PDF y listo.
+        pdf: {
+          en: "/docs/pulse-en.pdf", // TODO
+          es: "/docs/pulse-es.pdf", // TODO
+        },
+      },
+    },
+
+    {
+      id: "vacuum-chamber-cnt",
+      title: {
+        en: "Vacuum Chamber Concept for CNT Measurements + Materials Characterization",
+        es: "Concepto de Cámara de Vacío para Mediciones en CNT + Caracterización de Materiales",
+      },
+      category: "Engineering Design",
+      shortDescription: {
+        en: "Designed a compact vacuum chamber concept to enable controlled measurements on carbon nanotubes, supported by experimental planning and materials characterization deliverables.",
+        es: "Diseñé un concepto de cámara de vacío compacta para habilitar mediciones controladas en nanotubos de carbono, respaldado por planeación experimental y entregables de caracterización de materiales.",
+      },
+      overview: {
+        en: "Proposed a vacuum-compatible chamber architecture with practical interfaces (sensing, feedthroughs, observation) and documented constraints relevant to experimental electrical transport setups, integrating characterization results into a readable technical narrative.",
+        es: "Propuse una arquitectura de cámara compatible con vacío con interfaces prácticas (sensado, pasamuros, observación) y documenté restricciones relevantes para montajes de transporte eléctrico, integrando resultados de caracterización en una narrativa técnica legible.",
+      },
+
+      // Card image (static 16:9). Ej: render principal o foto del prototipo.
+      image: "/images/vc1.png",
+
+      // Modal image opcional (ej: lámina con render + etiquetas / resultados de caracterización)
+      detailImage: "/images/vc2.png",
+
+      achievements: [
+        {
+          en: "Produced a vacuum-chamber concept with key mechanical interfaces and instrumentation considerations for experimental measurements.",
+          es: "Desarrollé un concepto de cámara de vacío con interfaces mecánicas clave y consideraciones de instrumentación para mediciones experimentales.",
+        },
+        {
+          en: "Defined functional requirements (observation, sensing, feedthroughs) aligned with laboratory constraints.",
+          es: "Definí requerimientos funcionales (observación, sensado, pasamuros) alineados a restricciones de laboratorio.",
+        },
+        {
+          en: "Integrated materials characterization outputs into a concise, readable deliverable for engineering audiences.",
+          es: "Integré resultados de caracterización de materiales en un entregable conciso y legible para audiencias de ingeniería.",
+        },
+      ],
+      technologies: [
+        "Vacuum Engineering",
+        "Mechanical Design (CAD)",
+        "Instrumentation",
+        "Carbon Nanotubes (CNT)",
+        "Materials Characterization",
+      ],
+      links: {
+        // Recomendación: si tu presentación resume mejor, úsala como PDF en el sitio (más legible).
+        pdf: {
+          en: "/docs/materials-en.pdf", // TODO
+          es: "/docs/materials-es.pdf",   // TODO
+        },
+      },
+    },
+    {
+      id: "stargazer-reflector-telescope",
+      title: {
+        en: "Reflector Telescope (Stargazer) — Design, Build, and Simulation",
+        es: "Telescopio Reflector (Stargazer) — Diseño, Construcción y Simulación",
+      },
+      category: "Engineering Design",
+      shortDescription: {
+        en: "Designed and built a reflector telescope prototype, supported by simulations and performance-oriented engineering documentation.",
+        es: "Diseñé y construí un prototipo de telescopio reflector, respaldado por simulaciones y documentación ingenieril orientada a desempeño.",
+      },
+      overview: {
+        en: "Developed a design workflow combining optical/structural considerations, simulation-driven decisions, and prototype integration, producing a clear deliverable focused on practical implementation.",
+        es: "Desarrollé un flujo de diseño combinando consideraciones ópticas/estructurales, decisiones guiadas por simululación e integración de prototipo, generando un entregable claro enfocado en implementación práctica.",
+      },
+
+      // Card image (static 16:9). Ej: foto del telescopio / render del ensamblaje.
+      image: "/images/optics.png",
+
+      // Modal image opcional (ej: resultados de simulación / diagrama óptico)
+      detailImage: "/images/opticsrt.png",
+
+      achievements: [
+        {
+          en: "Produced an end-to-end design from concept to prototype with an engineering-focused report/presentation.",
+          es: "Desarrollé un diseño end-to-end de concepto a prototipo con reporte/presentación de enfoque ingenieril.",
+        },
+        {
+          en: "Supported design decisions with simulation outputs and practical constraints (manufacturing, assembly, alignment).",
+          es: "Respaldé decisiones de diseño con simulaciones y restricciones prácticas (manufactura, ensamble, alineación).",
+        },
+        {
+          en: "Documented the system for reproducibility (components, geometry, and test considerations).",
+          es: "Documenté el sistema para reproducibilidad (componentes, geometría y consideraciones de prueba).",
+        },
+      ],
+      technologies: [
+        "Optical Design",
+        "Mechanical Design (CAD)",
+        // "COMSOL" (si aplica a tu caso, déjalo)
+        "Simulation",
+        "Prototyping",
+      ],
+      links: {
+        pdf: {
+          en: "/docs/stargazer-en.pdf", // TODO
+          es: "/docs/stargazer-es.pdf", // TODO
+        },
+      },
+    },
+    {
+      id: "mach-zehnder-interferometer",
+      title: {
+        en: "Mach–Zehnder Interferometer — Build, Alignment, and Optical Characterization",
+        es: "Interferómetro de Mach–Zehnder — Construcción, Alineación y Caracterización Óptica",
+      },
+      category: "Experimental Research",
+      shortDescription: {
+        en: "Built and aligned a Mach–Zehnder interferometer to study interference fringes, polarization effects, and optical path sensitivity, with MATLAB-supported analysis.",
+        es: "Construí y alineé un interferómetro de Mach–Zehnder para estudiar franjas de interferencia, efectos de polarización y sensibilidad al camino óptico, con análisis apoyado en MATLAB.",
+      },
+      overview: {
+        en: "Implemented an optical interferometry setup (source + beam splitters + mirrors + recombination) and performed a controlled study of fringe formation and stability. The work includes polarization control elements and attenuation tests with filters, connecting experimental results with theory and MATLAB-based validation.",
+        es: "Implementé un montaje de interferometría óptica (fuente + divisores de haz + espejos + recombinación) y realicé un estudio controlado de la formación y estabilidad de franjas. El trabajo incluye control de polarización y pruebas de atenuación con filtros, conectando resultados experimentales con teoría y validación en MATLAB.",
+      },
+
+      // Card image (static 16:9). Ej: foto del setup, diagrama del MZI o captura de franjas.
+      image: "/images/mz.png", // TODO
+
+      // Modal image opcional (ej: franjas o diagrama/resultado más técnico)
+      detailImage: "/images/mzr.png", // TODO
+
+      achievements: [
+        {
+          en: "Assembled and aligned a Mach–Zehnder interferometer to obtain stable interference fringes suitable for analysis.",
+          es: "Armé y alineé un interferómetro Mach–Zehnder para obtener franjas de interferencia estables y analizables.",
+        },
+        {
+          en: "Studied polarization-dependent behavior using polarization optics (e.g., polarizers / wave plate) and documented its impact on visibility.",
+          es: "Estudié el comportamiento dependiente de polarización usando óptica de polarización (p. ej., polarizadores / placa de media onda) y documenté su impacto en la visibilidad.",
+        },
+        {
+          en: "Evaluated intensity attenuation and contrast changes with optical filters and power measurements.",
+          es: "Evalué atenuación de intensidad y cambios de contraste con filtros ópticos y mediciones de potencia.",
+        },
+        {
+          en: "Validated observations with MATLAB-supported modeling/simulation and compared with theoretical expectations.",
+          es: "Validé observaciones con modelación/simulación en MATLAB y comparé con expectativas teóricas.",
+        },
+      ],
+
+      technologies: [
+        "Optics Lab",
+        "Interferometry",
+        "Polarization Optics",
+        "Optical Filters",
+        "MATLAB",
+        // "Image Analysis" (si aplicó)
+      ],
+
+      links: {
+        pdf: {
+          en: "/docs/mach-zehnder-en.pdf", // TODO
+          es: "/docs/mach-zehnder-es.pdf", // TODO (o tu PDF en español)
+        },
+      },
+    },
 
 ];
 
