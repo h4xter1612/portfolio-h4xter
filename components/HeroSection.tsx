@@ -11,6 +11,9 @@ interface HeroSectionProps {
 export default function HeroSection({ lang }: HeroSectionProps) {
   const isEn = lang === "en";
 
+  const cvHref = isEn ? "/docs/JPSR_CV.pdf" : "/docs/JPSR_CV-ES.pdf";
+  const cvFileName = isEn ? "JPSR_CV.pdf" : "JPSR_CV-ES.pdf";
+
   return (
     <motion.section
       id="hero"
@@ -48,17 +51,19 @@ export default function HeroSection({ lang }: HeroSectionProps) {
           <a
             href="#projects"
             className="rounded-full bg-sky-500 px-7 py-2.5 text-sm font-semibold text-white shadow-lg shadow-sky-500/40 transition hover:-translate-y-0.5 hover:bg-sky-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/60"
-            aria-label={isEn ? "Jump to projects section" : "Ir a la sección de proyectos"}
+            aria-label={
+              isEn ? "Jump to projects section" : "Ir a la sección de proyectos"
+            }
           >
             {isEn ? "View Projects" : "Ver Proyectos"}
           </a>
 
           <a
-            href="/docs/JPSR_CV.pdf"
+            href={cvHref}
             className="rounded-full border border-slate-600 bg-slate-950/70 px-7 py-2.5 text-sm font-semibold text-slate-100 shadow-sm transition hover:border-sky-400 hover:bg-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/60"
             target="_blank"
             rel="noreferrer noopener"
-            download
+            download={cvFileName}
             aria-label={isEn ? "Open CV PDF" : "Abrir CV en PDF"}
           >
             {isEn ? "Download CV" : "Descargar CV"}
@@ -67,13 +72,21 @@ export default function HeroSection({ lang }: HeroSectionProps) {
 
         {/* Social icons */}
         <div className="mt-6 flex justify-center gap-4">
-          <SocialIcon href="https://github.com/h4xter1612" label="GitHub" Icon={Github} />
+          <SocialIcon
+            href="https://github.com/h4xter1612"
+            label="GitHub"
+            Icon={Github}
+          />
           <SocialIcon
             href="https://www.linkedin.com/in/juan-pablo-sol%C3%ADs-ruiz-h4xter"
             label="LinkedIn"
             Icon={Linkedin}
           />
-          <SocialIcon href="mailto:jp.sruiz18.tec@gmail.com" label="Email" Icon={Mail} />
+          <SocialIcon
+            href="mailto:jp.sruiz18.tec@gmail.com"
+            label="Email"
+            Icon={Mail}
+          />
         </div>
       </div>
     </motion.section>
