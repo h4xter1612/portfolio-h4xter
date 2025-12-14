@@ -1,4 +1,6 @@
-import { motion } from "framer-motion";
+"use client";
+
+import { motion, type Variants } from "framer-motion";
 import {
   Code2,
   Cpu,
@@ -6,6 +8,9 @@ import {
   Ruler,
   BarChart3,
   Sparkles,
+  BadgeCheck,
+  ArrowUpRight,
+  type LucideIcon,
 } from "lucide-react";
 import { Lang } from "../data/projects";
 
@@ -13,160 +18,373 @@ interface SkillsSectionProps {
   lang: Lang;
 }
 
+type SkillCard = {
+  icon: LucideIcon;
+  title: { en: string; es: string };
+  items: { en: string[]; es: string[] };
+  gradient: string;
+};
+
+type Certification = {
+  title: string;
+  issuer: string;
+  year: string;
+  badge: { en: string; es: string };
+  href: string;
+  topics: { en: string; es: string };
+};
+
+const sectionVariants: Variants = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.65, ease: "easeOut" } },
+};
+
+const gridVariants: Variants = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.06, delayChildren: 0.05 } },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 18 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
+};
+
+function BulletList({ items }: { items: string[] }) {
+  return (
+    <ul className="space-y-1.5 text-sm text-slate-300">
+      {items.map((item) => (
+        <li key={item} className="flex gap-2">
+          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-500/80" />
+          <span className="leading-relaxed">{item}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function SkillCardView({ card, lang }: { card: SkillCard; lang: Lang }) {
+  const Icon = card.icon;
+
+  return (
+    <motion.div
+      variants={itemVariants}
+      className="group relative h-full overflow-hidden rounded-3xl border border-slate-800/80 bg-slate-900/70 p-5 shadow-sm backdrop-blur-sm transition hover:-translate-y-1 hover:border-sky-400/50 hover:shadow-sky-500/10"
+    >
+      <div
+        className={`pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r ${card.gradient} opacity-70`}
+      />
+
+      <div className="mb-4 flex items-start gap-3">
+        <div
+          className={`mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-tr ${card.gradient} text-slate-950 shadow-lg`}
+        >
+          <Icon className="h-5 w-5" />
+        </div>
+
+        <div className="min-w-0">
+          <h3 className="text-[15px] font-semibold text-slate-50">
+            {card.title[lang]}
+          </h3>
+        </div>
+      </div>
+
+      <BulletList items={card.items[lang]} />
+    </motion.div>
+  );
+}
+
+function CertificationsGrid({
+  lang,
+  certs,
+}: {
+  lang: Lang;
+  certs: Certification[];
+}) {
+  const isEn = lang === "en";
+
+  return (
+    <motion.div
+      variants={gridVariants}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.2 }}
+      className="mt-10"
+    >
+      <div className="mb-5 flex items-start justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-sky-500/10 text-sky-300 ring-1 ring-sky-400/20">
+            <BadgeCheck className="h-5 w-5" />
+          </div>
+          <div>
+            <h3 className="text-[15px] font-semibold text-slate-50">
+              {isEn ? "Certifications" : "Certificaciones"}
+            </h3>
+            <p className="mt-1 text-xs text-slate-300">
+              {isEn
+                ? "Compact view with links; expand details only if needed."
+                : "Vista compacta con enlaces; expande detalles solo si hace falta."}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {certs.map((c) => (
+          <motion.div
+            key={`${c.title}-${c.year}`}
+            variants={itemVariants}
+            className="flex h-full flex-col rounded-3xl border border-slate-800/80 bg-slate-900/60 p-4 shadow-sm backdrop-blur-sm transition hover:border-sky-400/40"
+          >
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0">
+                <p className="text-sm font-semibold text-slate-100">
+                  {c.title}
+                </p>
+                <p className="mt-1 text-xs text-slate-300">
+                  {c.issuer}
+                  <span className="text-slate-500"> • </span>
+                  {c.year}
+                </p>
+              </div>
+
+              <span className="shrink-0 rounded-full border border-slate-700/70 bg-slate-950/30 px-2 py-1 text-[11px] text-slate-200">
+                {c.badge[lang]}
+              </span>
+            </div>
+
+            <div className="mt-3 flex items-center justify-between gap-3">
+              <a
+                href={c.href}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 text-xs font-semibold text-sky-300 hover:text-sky-200"
+                aria-label={isEn ? "Open certificate link" : "Abrir enlace del certificado"}
+              >
+                {isEn ? "View" : "Ver"}
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+
+              <span className="text-[11px] text-slate-500">
+                {isEn ? "Details" : "Detalles"}
+              </span>
+            </div>
+
+            {/* Collapsible details to avoid vertical dominance */}
+            <details className="mt-3 rounded-2xl border border-slate-800/70 bg-slate-950/20 p-3">
+              <summary className="cursor-pointer select-none text-xs font-semibold text-slate-200">
+                {isEn ? "Topics (expand)" : "Temas (expandir)"}
+              </summary>
+              <p className="mt-2 text-xs leading-relaxed text-slate-300">
+                {c.topics[lang]}
+              </p>
+            </details>
+
+            <div className="mt-auto" />
+          </motion.div>
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
 export default function SkillsSection({ lang }: SkillsSectionProps) {
   const isEn = lang === "en";
 
-  const cards = [
+  const cards: SkillCard[] = [
     {
       icon: Code2,
-      title: isEn
-        ? "Programming & Scientific Computing"
-        : "Programación y Cómputo Científico",
-      items: [
-        "Python, Julia, MATLAB, C++",
-        isEn ? "NumPy, SciPy, Pandas, Matplotlib" : "NumPy, SciPy, Pandas, Matplotlib",
-        isEn
-          ? "Reproducible scientific workflows"
-          : "Flujos de trabajo científicos reproducibles",
-      ],
+      title: {
+        en: "Programming & Scientific Computing",
+        es: "Programación y Cómputo Científico",
+      },
+      items: {
+        en: [
+          "Python, Julia, MATLAB, C++ (scientific/engineering use)",
+          "NumPy, SciPy, Pandas, Matplotlib",
+          "Reproducible workflows: modular code, clear docs, version control",
+        ],
+        es: [
+          "Python, Julia, MATLAB, C++ (uso científico/ingenieril)",
+          "NumPy, SciPy, Pandas, Matplotlib",
+          "Flujos reproducibles: código modular, documentación clara, control de versiones",
+        ],
+      },
       gradient: "from-sky-400 to-cyan-300",
     },
     {
       icon: Cpu,
-      title: isEn ? "Simulation & Modelling" : "Simulación y Modelado",
-      items: [
-        isEn
-          ? "PIC, MHD and two-fluid plasma models"
-          : "Modelos de plasma PIC, MHD y dos fluidos",
-        isEn
-          ? "Numerical methods for ODEs/PDEs"
-          : "Métodos numéricos para EDOs/EDPs",
-        isEn
-          ? "Geant4 and spectral/Fourier tools"
-          : "Geant4 y herramientas espectrales/Fourier",
-      ],
+      title: { en: "Simulation & Modelling", es: "Simulación y Modelado" },
+      items: {
+        en: [
+          "PIC, resistive MHD and two-fluid plasma models",
+          "Numerical methods for ODEs/PDEs; stability-minded implementations",
+          "Spectral/Fourier tools; diagnostics-driven analysis",
+        ],
+        es: [
+          "Modelos de plasma PIC, MHD resistivo y dos fluidos",
+          "Métodos numéricos para EDOs/EDPs; implementaciones orientadas a estabilidad",
+          "Herramientas espectrales/Fourier; análisis guiado por diagnósticos",
+        ],
+      },
       gradient: "from-purple-400 to-sky-300",
     },
     {
       icon: Sparkles,
-      title: isEn ? "Fusion & Plasma Physics" : "Fusión y Física de Plasmas",
-      items: [
-        isEn
-          ? "Tokamak and Z-pinch equilibria"
-          : "Equilibrios en tokamaks y Z-pinch",
-        isEn
-          ? "Waves, instabilities and dispersion"
-          : "Ondas, inestabilidades y dispersión",
-        isEn
-          ? "Grad–Shafranov and FreeGSNKE"
-          : "Grad–Shafranov y FreeGSNKE",
-      ],
+      title: { en: "Fusion & Plasma Physics", es: "Fusión y Física de Plasmas" },
+      items: {
+        en: [
+          "Tokamak & Z-pinch equilibrium concepts and stability intuition",
+          "Waves, instabilities and dispersion (linking theory ↔ simulation)",
+          "Grad–Shafranov workflows and FreeGSNKE-based diagnostics",
+        ],
+        es: [
+          "Conceptos de equilibrio y estabilidad en tokamaks y Z-pinch",
+          "Ondas, inestabilidades y dispersión (conectando teoría ↔ simulación)",
+          "Flujos Grad–Shafranov y diagnósticos con FreeGSNKE",
+        ],
+      },
       gradient: "from-indigo-400 to-purple-300",
     },
     {
       icon: Ruler,
-      title: isEn
-        ? "RF, Antennas & Experimental"
-        : "RF, Antenas y Experimental",
-      items: [
-        isEn
-          ? "CubeSat S-band RF links"
-          : "Enlaces RF en banda S para CubeSat",
-        isEn
-          ? "Patch and fractal antennas (KiCad)"
-          : "Antenas patch y fractales (KiCad)",
-        isEn
-          ? "Optics and basic instrumentation"
-          : "Óptica e instrumentación básica",
-      ],
+      title: {
+        en: "RF, Antennas & Experimental",
+        es: "RF, Antenas y Experimental",
+      },
+      items: {
+        en: [
+          "CubeSat S-band RF links; practical integration and testing",
+          "Patch and fractal antennas (HFSS + KiCad layouts/prototypes)",
+          "Optics lab work and basic instrumentation",
+        ],
+        es: [
+          "Enlaces RF en banda S para CubeSat; integración y pruebas",
+          "Antenas patch y fractales (HFSS + layouts/prototipos en KiCad)",
+          "Trabajo en óptica e instrumentación básica",
+        ],
+      },
       gradient: "from-amber-400 to-lime-300",
     },
     {
       icon: BarChart3,
-      title: isEn ? "Data Science & Analysis" : "Ciencia de Datos y Análisis",
-      items: [
-        isEn
-          ? "Statistical modelling and EDA"
-          : "Modelado estadístico y análisis exploratorio",
-        isEn
-          ? "Basic ML (regression, classification)"
-          : "ML básico (regresión, clasificación)",
-        isEn
-          ? "Scientific data visualisation"
-          : "Visualización de datos científicos",
-      ],
+      title: { en: "Data Science & Analysis", es: "Ciencia de Datos y Análisis" },
+      items: {
+        en: [
+          "Statistical modeling and exploratory analysis for scientific datasets",
+          "Basic ML (regression/classification) when appropriate",
+          "Clear, publication-style figures and result summaries",
+        ],
+        es: [
+          "Modelado estadístico y análisis exploratorio en datos científicos",
+          "ML básico (regresión/clasificación) cuando aporta valor",
+          "Figuras claras estilo reporte y síntesis de resultados",
+        ],
+      },
       gradient: "from-emerald-400 to-teal-300",
     },
     {
       icon: FlaskConical,
-      title: isEn ? "Research & Collaboration" : "Investigación y Colaboración",
-      items: [
-        isEn
-          ? "Independent fusion/plasma projects"
-          : "Proyectos independientes en fusión/plasmas",
-        isEn
-          ? "Interdisciplinary teams (GeoStats, CubeSat)"
-          : "Equipos interdisciplinarios (GeoStats, CubeSat)",
-        isEn
-          ? "Mentoring and physics tutoring"
-          : "Mentoría y tutoría en física",
-      ],
+      title: { en: "Research & Collaboration", es: "Investigación y Colaboración" },
+      items: {
+        en: [
+          "Independent research initiative with strong technical writing",
+          "Interdisciplinary teamwork (engineering + physics contexts)",
+          "Mentoring / tutoring and structured communication",
+        ],
+        es: [
+          "Iniciativa de investigación independiente con redacción técnica sólida",
+          "Trabajo interdisciplinario (contextos de ingeniería + física)",
+          "Mentoría / tutoría y comunicación estructurada",
+        ],
+      },
       gradient: "from-pink-400 to-orange-300",
+    },
+  ];
+
+  const certs: Certification[] = [
+    {
+      title: "PlasmaApplicationX: Plasma Physics – Applications",
+      issuer: "EPFLx / edX (École Polytechnique Fédérale de Lausanne)",
+      year: "2025",
+      badge: { en: "Verified", es: "Verificado" },
+      href: "https://courses.edx.org/certificates/12f2a36e4afa4cf995f74a2c678163bf",
+      topics: {
+        en: "Space & astrophysical plasmas; industrial/medical applications; fusion power balance; magnetic confinement devices (tokamaks, stellarators).",
+        es: "Plasmas espaciales/astrofísicos; aplicaciones industriales/médicas; balance de potencia en fusión; confinamiento magnético (tokamaks, stellarators).",
+      },
+    },
+    {
+      title: "PlasmaIntroductionX: Plasma Physics – Introduction",
+      issuer: "EPFLx / edX (École Polytechnique Fédérale de Lausanne)",
+      year: "2025",
+      badge: { en: "Verified", es: "Verificado" },
+      href: "https://courses.edx.org/certificates/88fdb82fac6c419288f9a8cc5c273a93",
+      topics: {
+        en: "Debye shielding; single-particle motion; Vlasov/two-fluid/MHD; equilibrium & stability; MHD waves; basic numerical modeling.",
+        es: "Apantallamiento de Debye; movimiento de partícula; Vlasov/dos fluidos/MHD; equilibrio y estabilidad; ondas MHD; modelado numérico básico.",
+      },
+    },
+    {
+      title: "Complete Guide to C++ Programming Foundations",
+      issuer: "LinkedIn Learning",
+      year: "2025",
+      badge: { en: "Completed", es: "Completado" },
+      href: "https://www.linkedin.com/learning/certificates/3e3ff88a7b84a8bc384256876bdc9e6ca45422cd1afeb44fdebc5d0374c2b779?trk=share_certificate",
+      topics: {
+        en: "C++ fundamentals for scientific/engineering work: types, pointers, references, control flow, functions, classes, and intro STL.",
+        es: "Fundamentos de C++ para trabajo científico/ingenieril: tipos, punteros, referencias, control de flujo, funciones, clases e introducción a STL.",
+      },
+    },
+    {
+      title: "Lean Six Sigma White Belt",
+      issuer: "Certification",
+      year: "2023",
+      badge: { en: "Certified", es: "Certificado" },
+      href: "/docs/LeanSixSigma.pdf",
+      topics: {
+        en: "Process improvement basics: DMAIC overview, quality mindset, and foundational problem-structuring tools.",
+        es: "Bases de mejora de procesos: visión general de DMAIC, enfoque de calidad y herramientas fundamentales para estructurar problemas.",
+      },
     },
   ];
 
   return (
     <motion.section
       id="skills"
-      className="scroll-mt-28 min-h-screen flex flex-col justify-center py-20"
-      initial={{ opacity: 0, y: 32 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
+      className="scroll-mt-28 py-20 md:py-24"
+      variants={sectionVariants}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.25 }}
     >
-      <div className="space-y-10">
-        <div className="text-center space-y-3">
+      <div className="mx-auto w-full max-w-6xl px-6">
+        <div className="mb-10 space-y-3 text-center">
           <h2 className="text-4xl font-semibold text-sky-400 md:text-5xl">
             {isEn ? "Skills & Expertise" : "Habilidades y Experiencia"}
           </h2>
-          <p className="text-sm text-slate-300 md:text-base">
+          <p className="mx-auto max-w-2xl text-sm text-slate-300 md:text-base">
             {isEn
-              ? "Skills focused on fusion and plasma physics: simulation codes, RF/antennas and data analysis."
-              : "Habilidades enfocadas en fusión y plasmas: códigos de simulación, RF/antenas y análisis de datos."}
+              ? "A concise overview of my technical strengths across plasma/fusion, simulation, and engineering."
+              : "Resumen conciso de mis fortalezas técnicas en plasmas/fusión, simulación e ingeniería."}
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3">
-          {cards.map((card, idx) => {
-            const Icon = card.icon;
-            return (
-              <motion.div
-                key={card.title}
-                className="group rounded-3xl border border-slate-800 bg-slate-900/85 p-5 shadow-md transition hover:-translate-y-1 hover:border-sky-400/70 hover:shadow-sky-500/30"
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.5, delay: 0.06 * idx }}
-              >
-                <div className="mb-4 flex items-center gap-3">
-                  <div
-                    className={`flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-tr ${card.gradient} text-slate-950 shadow-lg`}
-                  >
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <h3 className="text-sm font-semibold text-slate-50 md:text-base">
-                    {card.title}
-                  </h3>
-                </div>
-                <ul className="space-y-1 text-xs text-slate-300 md:text-sm">
-                  {card.items.map((item) => (
-                    <li key={item}>• {item}</li>
-                  ))}
-                </ul>
-              </motion.div>
-            );
-          })}
-        </div>
+        {/* Skills grid only (no sidebar) */}
+        <motion.div
+          variants={gridVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.25 }}
+        >
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {cards.map((card) => (
+              <SkillCardView key={card.title.en} card={card} lang={lang} />
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Certifications distributed as compact grid below */}
+        <CertificationsGrid lang={lang} certs={certs} />
       </div>
     </motion.section>
   );
