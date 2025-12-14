@@ -479,12 +479,10 @@ export default function SkillsSection({ lang }: SkillsSectionProps) {
 
     return (
         <motion.section
-            id="skills"
-            className="scroll-mt-28 py-20 md:py-24"
-            variants={sectionVariants}
-            initial="hidden"
-            whileInView="show"
+            initial={false}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
         >
             <div className="mx-auto w-full max-w-6xl px-6">
                 <div className="mb-10 space-y-3 text-center">
