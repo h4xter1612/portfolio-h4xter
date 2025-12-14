@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import { motion, type Variants } from "framer-motion";
 import {
   Code2,
@@ -34,6 +35,13 @@ type Certification = {
   topics: { en: string; es: string };
 };
 
+type TecBadge = {
+  title: { en: string; es: string };
+  issued: { en: string; es: string };
+  href: string;
+  imageSrc: string;
+};
+
 const sectionVariants: Variants = {
   hidden: { opacity: 0, y: 28 },
   show: { opacity: 1, y: 0, transition: { duration: 0.65, ease: "easeOut" } },
@@ -41,7 +49,10 @@ const sectionVariants: Variants = {
 
 const gridVariants: Variants = {
   hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.06, delayChildren: 0.05 } },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.06, delayChildren: 0.05 },
+  },
 };
 
 const itemVariants: Variants = {
@@ -158,7 +169,9 @@ function CertificationsGrid({
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-1 text-xs font-semibold text-sky-300 hover:text-sky-200"
-                aria-label={isEn ? "Open certificate link" : "Abrir enlace del certificado"}
+                aria-label={
+                  isEn ? "Open certificate link" : "Abrir enlace del certificado"
+                }
               >
                 {isEn ? "View" : "Ver"}
                 <ArrowUpRight className="h-4 w-4" />
@@ -169,7 +182,6 @@ function CertificationsGrid({
               </span>
             </div>
 
-            {/* Collapsible details to avoid vertical dominance */}
             <details className="mt-3 rounded-2xl border border-slate-800/70 bg-slate-950/20 p-3">
               <summary className="cursor-pointer select-none text-xs font-semibold text-slate-200">
                 {isEn ? "Topics (expand)" : "Temas (expandir)"}
@@ -184,6 +196,99 @@ function CertificationsGrid({
         ))}
       </div>
     </motion.div>
+  );
+}
+
+function TecBadgesPanel({ lang, badges }: { lang: Lang; badges: TecBadge[] }) {
+  const isEn = lang === "en";
+  const [showAll, setShowAll] = useState(false);
+
+  const visibleBadges = useMemo(() => {
+    if (showAll) return badges;
+    return badges.slice(0, 4);
+  }, [badges, showAll]);
+
+  return (
+    <div className="mt-6">
+      <details className="rounded-3xl border border-slate-800/80 bg-slate-900/60 p-5 backdrop-blur-sm">
+        <summary className="cursor-pointer select-none list-none">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <p className="text-[15px] font-semibold text-slate-50">
+                {isEn ? "Tec Competency Badges" : "Badges de Competencias (Tec)"}
+              </p>
+              <p className="mt-1 text-xs text-slate-300">
+                {isEn
+                  ? "Supporting evidence. Open only if you want extra detail."
+                  : "Evidencia complementaria. Ábrelo solo si quieres más detalle."}
+              </p>
+            </div>
+
+            <span className="shrink-0 rounded-full border border-slate-700/70 bg-slate-950/30 px-2 py-1 text-[11px] text-slate-200">
+              {badges.length} {isEn ? "badges" : "badges"}
+            </span>
+          </div>
+        </summary>
+
+        <div className="mt-4">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {visibleBadges.map((b) => (
+              <a
+                key={b.href}
+                href={b.href}
+                target="_blank"
+                rel="noreferrer"
+                className="group rounded-3xl border border-slate-800/80 bg-slate-950/20 p-4 transition hover:border-sky-400/40"
+                aria-label={
+                  isEn
+                    ? "Open badge validation link"
+                    : "Abrir enlace de validación del badge"
+                }
+              >
+                <div className="flex items-center gap-3">
+                  <img
+                    src={b.imageSrc}
+                    alt={b.title[lang]}
+                    loading="lazy"
+                    className="h-14 w-14 rounded-2xl ring-1 ring-slate-800/70"
+                  />
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-semibold text-slate-100">
+                      {b.title[lang]}
+                    </p>
+                    <p className="mt-0.5 text-xs text-slate-400">
+                      {b.issued[lang]}
+                    </p>
+                  </div>
+                </div>
+
+                <p className="mt-3 text-xs font-semibold text-sky-300 opacity-0 transition group-hover:opacity-100">
+                  {isEn ? "View validation" : "Ver validación"}
+                </p>
+              </a>
+            ))}
+          </div>
+
+          {badges.length > 4 && (
+            <div className="mt-4 flex justify-center">
+              <button
+                type="button"
+                onClick={() => setShowAll((v) => !v)}
+                className="rounded-full border border-slate-700/70 bg-slate-950/30 px-4 py-2 text-xs font-semibold text-slate-200 transition hover:border-sky-400/40 hover:text-sky-200"
+              >
+                {showAll
+                  ? isEn
+                    ? "Show fewer"
+                    : "Mostrar menos"
+                  : isEn
+                  ? `Show all ${badges.length}`
+                  : `Mostrar los ${badges.length}`}
+              </button>
+            </div>
+          )}
+        </div>
+      </details>
+    </div>
   );
 }
 
@@ -348,6 +453,64 @@ export default function SkillsSection({ lang }: SkillsSectionProps) {
     },
   ];
 
+  const tecBadges: TecBadge[] = [
+    {
+      title: { en: "Research Stay", es: "Estancia de Investigación" },
+      issued: { en: "Apr 2025", es: "Abr 2025" },
+      href: "https://badges.parchment.com/public/assertions/8tsBfUMCSyel8PxC6DcD7w",
+      imageSrc:
+        "https://api.badgr.io/public/assertions/8tsBfUMCSyel8PxC6DcD7w/image",
+    },
+    {
+      title: { en: "Model Building", es: "Construcción de modelos" },
+      issued: { en: "Apr 2025", es: "Abr 2025" },
+      href: "https://badges.parchment.com/public/assertions/HHBUmb1IR6iTF_4bnC9j8Q",
+      imageSrc:
+        "https://api.badgr.io/public/assertions/HHBUmb1IR6iTF_4bnC9j8Q/image",
+    },
+    {
+      title: {
+        en: "Characterization of Physical Phenomena",
+        es: "Caracterización de fenómenos físicos",
+      },
+      issued: { en: "Apr 2025", es: "Abr 2025" },
+      href: "https://badges.parchment.com/public/assertions/5FLulLFWRjGS_tUa4FRofA",
+      imageSrc:
+        "https://api.badgr.io/public/assertions/5FLulLFWRjGS_tUa4FRofA/image",
+    },
+    {
+      title: { en: "Information Communication", es: "Comunicación de información" },
+      issued: { en: "Apr 2025", es: "Abr 2025" },
+      href: "https://badges.parchment.com/public/assertions/aIhfUbr-TQeWy94mx9EQuw",
+      imageSrc:
+        "https://api.badgr.io/public/assertions/aIhfUbr-TQeWy94mx9EQuw/image",
+    },
+    {
+      title: { en: "Complex Problem Solving", es: "Solución de problemas complejos" },
+      issued: { en: "Apr 2025", es: "Abr 2025" },
+      href: "https://badges.parchment.com/public/assertions/6ek-039cTkm8yZ5bVNB80g",
+      imageSrc:
+        "https://api.badgr.io/public/assertions/6ek-039cTkm8yZ5bVNB80g/image",
+    },
+    {
+      title: {
+        en: "Identification of Physical Phenomena",
+        es: "Identificación de fenómenos físicos",
+      },
+      issued: { en: "Apr 2025", es: "Abr 2025" },
+      href: "https://badges.parchment.com/public/assertions/PRGE3-3USLOKx-iFVsUXrg",
+      imageSrc:
+        "https://api.badgr.io/public/assertions/PRGE3-3USLOKx-iFVsUXrg/image",
+    },
+    {
+      title: { en: "Self-Awareness & Self-Management", es: "Autoconocimiento y gestión" },
+      issued: { en: "Apr 2025", es: "Abr 2025" },
+      href: "https://badges.parchment.com/public/assertions/baESYvEaTKmwPBi5zrCB9w",
+      imageSrc:
+        "https://api.badgr.io/public/assertions/baESYvEaTKmwPBi5zrCB9w/image",
+    },
+  ];
+
   return (
     <motion.section
       id="skills"
@@ -369,7 +532,6 @@ export default function SkillsSection({ lang }: SkillsSectionProps) {
           </p>
         </div>
 
-        {/* Skills grid only (no sidebar) */}
         <motion.div
           variants={gridVariants}
           initial="hidden"
@@ -383,8 +545,8 @@ export default function SkillsSection({ lang }: SkillsSectionProps) {
           </div>
         </motion.div>
 
-        {/* Certifications distributed as compact grid below */}
         <CertificationsGrid lang={lang} certs={certs} />
+        <TecBadgesPanel lang={lang} badges={tecBadges} />
       </div>
     </motion.section>
   );
