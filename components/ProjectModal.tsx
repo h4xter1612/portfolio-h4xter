@@ -2,13 +2,14 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import type { Project, Lang, ProjectCategory, PdfLink, LocalizedHref } from "../data/projects";
+import type { Project, Lang, ProjectCategory, ProjectType, PdfLink, LocalizedHref } from "../data/projects";
 import { ExternalLink, FileText, Github, X } from "lucide-react";
 
 interface ProjectModalProps {
   project: Project | null;
   lang: Lang;
   categoryLabels: Record<ProjectCategory, { en: string; es: string }>;
+  typeLabels: Record<ProjectType, { en: string; es: string }>;
   onClose: () => void;
 }
 
@@ -16,6 +17,8 @@ const ui = {
   achievements: { en: "Key Achievements", es: "Logros Clave" },
   tech: { en: "Technologies & Tools", es: "Tecnologías y Herramientas" },
   links: { en: "Links", es: "Enlaces" },
+  domain: { en: "Domain", es: "Área" },
+  modalities: { en: "Work type", es: "Tipo de trabajo" },
   viewGitHub: { en: "View GitHub", es: "Ver GitHub" },
   openPdf: { en: "Open PDF", es: "Abrir PDF" },
   downloadPdf: { en: "Download PDF", es: "Descargar PDF" },
@@ -33,7 +36,6 @@ function resolveLocalizedHref(link: PdfLink | undefined, lang: Lang): string | u
 
   const localized = link as LocalizedHref;
 
-  // Preferir idioma actual; fallback a EN; luego ES; luego cualquiera disponible
   return (
     localized[lang] ??
     localized.en ??
@@ -46,6 +48,7 @@ export default function ProjectModal({
   project,
   lang,
   categoryLabels,
+  typeLabels,
   onClose,
 }: ProjectModalProps) {
   const shouldReduceMotion = useReducedMotion();
@@ -113,7 +116,6 @@ export default function ProjectModal({
   } as const;
 
   const mediaSrc = project?.detailImage ?? project?.image;
-
   const pdfHref = resolveLocalizedHref(project?.links?.pdf, lang);
 
   return (
@@ -156,10 +158,20 @@ export default function ProjectModal({
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={mediaSrc} alt={t(project.title)} className="h-full w-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
+
+              {/* Top chips */}
               <div className="absolute left-5 top-5 flex flex-wrap items-center gap-2">
                 <span className="rounded-full bg-slate-950/70 px-3 py-1 text-[11px] font-semibold text-sky-200 ring-1 ring-slate-700/70 backdrop-blur">
                   {t(categoryLabels[project.category])}
                 </span>
+                {project.types.slice(0, 3).map((tp) => (
+                  <span
+                    key={tp}
+                    className="rounded-full bg-slate-950/60 px-3 py-1 text-[11px] font-semibold text-slate-200 ring-1 ring-slate-700/60 backdrop-blur"
+                  >
+                    {t(typeLabels[tp])}
+                  </span>
+                ))}
               </div>
             </div>
 
@@ -242,7 +254,7 @@ export default function ProjectModal({
 }
 
 function PdfButton({ lang, href }: { lang: Lang; href: string }) {
-  const external = isExternalUrl(href);
+  const external = /^https?:\/\//i.test(href);
 
   const label =
     external
