@@ -11,8 +11,8 @@ interface HeroSectionProps {
 export default function HeroSection({ lang }: HeroSectionProps) {
   const isEn = lang === "en";
 
-  const cvHref = isEn ? "/docs/JPSR_CV.pdf" : "/docs/JPSR_CV-ES.pdf";
-  const cvFileName = isEn ? "JPSR_CV.pdf" : "JPSR_CV-ES.pdf";
+  const cvHref = isEn ? "/docs/JPSR_CV.pdf" : "/docs/JPSR_CV-es.pdf";
+  const cvFileName = isEn ? "JPSR_CV.pdf" : "JPSR_CV-es.pdf";
 
   return (
     <motion.section
