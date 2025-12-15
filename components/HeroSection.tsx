@@ -78,7 +78,7 @@ export default function HeroSection({ lang }: HeroSectionProps) {
             Icon={Github}
           />
           <SocialIcon
-            href="https://www.linkedin.com/in/juan-pablo-sol%C3%ADs-ruiz-h4xter"
+            href="https://www.linkedin.com/in/jpsolisruiz"
             label="LinkedIn"
             Icon={Linkedin}
           />
